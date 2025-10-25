@@ -4,7 +4,7 @@ import torch.nn as nn
 import json
 
 # Load scaler parameters
-with open('python/scaler_params.json', 'r') as f:
+with open('/Users/zengrf/Documents/GitHub/machine-learning-math/triple-root-locus/python/scaler_params.json', 'r') as f:
     scaler_params = json.load(f)
 
 mean = np.array(scaler_params['mean'])
@@ -28,7 +28,7 @@ class TripleRootClassifier(nn.Module):
 # Load model
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 model = TripleRootClassifier(input_dim=10, hidden_dim=2048).to(device)
-model.load_state_dict(torch.load('python/triple_root_model.pth', map_location=device))
+model.load_state_dict(torch.load('/Users/zengrf/Documents/GitHub/machine-learning-math/triple-root-locus/python/triple_root_model.pth', map_location=device))
 model.eval()
 
 print("Model loaded successfully!\n")
@@ -113,7 +113,8 @@ print("-" * 60)
 test_cases_negative = [
     {"coeffs": [1, -6, 11, -6, 0], "name": "x(x-1)(x-2)(x-3)"},
     {"coeffs": [1, -2, -5, 6, 0], "name": "x(x-1)(x+2)(x-3)"},
-    {"coeffs": [1, 0, -2, 0, 1], "name": "x^4 - 2x^2y^2 + y^4"},
+    # {"coeffs": [1, 0, -2, 0, 1], "name": "x^4 - 2x^2y^2 + y^4"},
+    {"coeffs": [1, 0, 0, 0, 0], "name": "x^4"},
     {"coeffs": [1, 2, 3, 2, 1], "name": "x^4 + 2x^3y + 3x^2y^2 + 2xy^3 + y^4"},
     {"coeffs": [1, -1, 1, -1, 1], "name": "x^4 - x^3y + x^2y^2 - xy^3 + y^4"},
 ]
