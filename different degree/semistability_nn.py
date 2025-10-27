@@ -23,7 +23,7 @@ Data generation
     verified by a deterministic multiplicity check; unstable samples are constructed by design.
 
 Model
-- 8-layer fully connected MLP with ReLU, trained in NumPy with full-batch cross-entropy and Adam (β1=0.9, β2=0.999).
+- 3-layer fully connected MLP with 1 hidden layer of 2048 dimensions and ReLU activation, trained in NumPy with full-batch cross-entropy and Adam (β1=0.9, β2=0.999).
 
 Deterministic instability check and graphs
 - A deterministic multiplicity checker (univariate reduction + root clustering) verifies instability (max multiplicity > d/2).
@@ -365,7 +365,7 @@ def generate_dataset(per_degree_n: int = 10_000,
 
 
 # ------------------------------
-# Simple NumPy MLP (1 hidden layer)
+# Simple NumPy MLP (1 hidden layer with 2048 dimensions)
 # ------------------------------
 
 @dataclass
@@ -613,7 +613,7 @@ def plot_training_curves(loss_hist: List[float],
 
     plt.suptitle(title_override or 'Training Dynamics: Loss and Accuracy over Epochs')
     caption = (
-        'Caption: Optimization trajectory of the 8-layer MLP trained with Adam on the selected degrees. The red curve\n'
+        'Caption: Optimization trajectory of the 3-layer MLP (1 hidden layer with 2048 dimensions) trained with Adam on the selected degrees. The red curve\n'
         'shows cross-entropy loss per epoch (left axis), while the blue and green curves show training and validation\n'
         'accuracy (right axis). Higher accuracy indicates correct discrimination between semistable (all root\n'
         'multiplicities ≤ d/2) and unstable polynomials (∃ root with multiplicity > d/2). Divergence between train and\n'
